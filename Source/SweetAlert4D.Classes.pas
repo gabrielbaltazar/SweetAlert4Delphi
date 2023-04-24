@@ -265,6 +265,19 @@ begin
       .SetValue('timer', FTimer)
       .SetValue('position', FPosition.Value);
 
+    LSweetMessage.SetValue('showCloseButton', FButtons.ShowCloseButton)
+      .SetValue('showCancelButton', FButtons.ShowCancelButton)
+      .SetValue('showDenyButton', FButtons.ShowDenyButton)
+      .SetValue('focusConfirm', FButtons.FocusConfirm)
+      .SetValue('denyButtonText', FButtons.DenyButtonText)
+      .SetValue('confirmButtonText', FButtons.ConfirmButtonText)
+      .SetValue('cancelButtonText', FButtons.CancelButtonText)
+      .SetValue('denyButtonText', FButtons.DenyButtonText)
+      .SetValue('confirmButtonColor', FButtons.ConfirmButtonColor)
+      .SetValue('cancelButtonColor', FButtons.CancelButtonColor)
+      .SetValue('denyButtonColor', FButtons.DenyButtonColor)
+      .SetValue('reverseButtons', FButtons.ReverseButtons);
+
     Result := LSweetMessage.ToJSON;
   finally
     LSweetMessage.Free;

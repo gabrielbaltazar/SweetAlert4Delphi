@@ -1,7 +1,7 @@
 object FrmTeste: TFrmTeste
   Left = 0
   Top = 0
-  Width = 555
+  Width = 797
   Height = 400
   RenderInvisibleControls = True
   AllowPageAccess = True
@@ -16,22 +16,22 @@ object FrmTeste: TFrmTeste
   ShowHint = True
   DesignLeft = 2
   DesignTop = 2
-  object IWBTN_BASIC_MESSAGE_SERVER: TIWButton
-    Left = 48
-    Top = 80
-    Width = 169
+  object IWBTN_BASIC_SERVER: TIWButton
+    Left = 16
+    Top = 32
+    Width = 145
     Height = 30
-    Caption = 'Basic Message - Server'
+    Caption = 'Basic - Server'
     Color = clBtnFace
-    FriendlyName = 'IWBTN_BASIC_MESSAGE_SERVER'
-    OnAsyncClick = IWBTN_BASIC_MESSAGE_SERVERAsyncClick
+    FriendlyName = 'IWBTN_BASIC_SERVER'
+    OnAsyncClick = IWBTN_BASIC_SERVERAsyncClick
   end
-  object IWBASIC_MESSAGE_CLIENT: TIWButton
-    Left = 256
-    Top = 80
-    Width = 161
+  object IWBASIC_CLIENT: TIWButton
+    Left = 167
+    Top = 32
+    Width = 145
     Height = 30
-    Caption = 'Basic Message - Client'
+    Caption = 'Basic - Client'
     Color = clBtnFace
     FriendlyName = 'IWBTN_BASIC_MESSAGE'
     ScriptEvents = <
@@ -42,33 +42,33 @@ object FrmTeste: TFrmTeste
       end>
   end
   object IWBTN_QUESTION: TIWButton
-    Left = 48
-    Top = 248
-    Width = 169
+    Left = 16
+    Top = 208
+    Width = 145
     Height = 30
     Caption = 'Question - Server'
     Color = clBtnFace
     FriendlyName = 'IWBTN_QUESTION'
     OnAsyncClick = IWBTN_QUESTIONAsyncClick
   end
-  object IWBTN_SUCCESS_MESSAGE_SERVER: TIWButton
-    Left = 48
-    Top = 128
-    Width = 169
+  object IWBTN_SUCCESS_SERVER: TIWButton
+    Left = 16
+    Top = 80
+    Width = 145
     Height = 30
-    Caption = 'Success Message - Server'
+    Caption = 'Success - Server'
     Color = clBtnFace
-    FriendlyName = 'IWBTN_SUCCESS_MESSAGE_SERVER'
-    OnAsyncClick = IWBTN_SUCCESS_MESSAGE_SERVERAsyncClick
+    FriendlyName = 'IWBTN_SUCCESS_SERVER'
+    OnAsyncClick = IWBTN_SUCCESS_SERVERAsyncClick
   end
-  object IWBTN_SUCCESS_MESSAGE_CLIENT: TIWButton
-    Left = 256
-    Top = 128
-    Width = 161
+  object IWBTN_SUCCESS_CLIENT: TIWButton
+    Left = 16
+    Top = 132
+    Width = 145
     Height = 30
-    Caption = 'Success Message - Client'
+    Caption = 'Success - Client'
     Color = clBtnFace
-    FriendlyName = 'IWBTN_SUCCESS_MESSAGE_CLIENT'
+    FriendlyName = 'IWBTN_SUCCESS_CLIENT'
     ScriptEvents = <
       item
         EventCode.Strings = (
@@ -76,28 +76,80 @@ object FrmTeste: TFrmTeste
         Event = 'onClick'
       end>
   end
-  object IWBTN_ERROR_MESSAGE_SERVER: TIWButton
-    Left = 48
-    Top = 176
-    Width = 169
+  object IWBTN_ERROR_SERVER: TIWButton
+    Left = 167
+    Top = 80
+    Width = 145
     Height = 30
-    Caption = 'Error Message - Server'
+    Caption = 'Error - Server'
     Color = clBtnFace
     FriendlyName = 'IWBTN_SUCCESS_MESSAGE_SERVER'
-    OnAsyncClick = IWBTN_ERROR_MESSAGE_SERVERAsyncClick
+    OnAsyncClick = IWBTN_ERROR_SERVERAsyncClick
   end
-  object IWBTN_ERROR_MESSAGE_CLIENT: TIWButton
-    Left = 256
-    Top = 176
-    Width = 161
+  object IWBTN_ERROR_CLIENT: TIWButton
+    Left = 167
+    Top = 132
+    Width = 145
     Height = 30
-    Caption = 'Error Message - Client'
+    Caption = 'Error - Client'
     Color = clBtnFace
-    FriendlyName = 'IWBTN_SUCCESS_MESSAGE_CLIENT'
+    FriendlyName = 'IWBTN_ERROR_CLIENT'
     ScriptEvents = <
       item
         EventCode.Strings = (
-          'ShowBasicError('#39'Ops...'#39', '#39'Something went wrong!'#39')')
+          'ShowBasicError('#39'Ops...'#39', '#39'Something went wrong!'#39');')
+        Event = 'onClick'
+      end>
+  end
+  object IWBTN_WARNING_SERVER: TIWButton
+    Left = 318
+    Top = 80
+    Width = 145
+    Height = 30
+    Caption = 'Warning - Server'
+    Color = clBtnFace
+    FriendlyName = 'IWBTN_WARNING_SERVER'
+    OnAsyncClick = IWBTN_WARNING_SERVERAsyncClick
+  end
+  object IWBTN_INFO_SERVER: TIWButton
+    Left = 469
+    Top = 80
+    Width = 145
+    Height = 30
+    Caption = 'Info - Server'
+    Color = clBtnFace
+    FriendlyName = 'IWBTN_SUCCESS_MESSAGE_SERVER'
+    OnAsyncClick = IWBTN_INFO_SERVERAsyncClick
+  end
+  object IWBTN_WARNING_CLIENT: TIWButton
+    Left = 318
+    Top = 132
+    Width = 145
+    Height = 30
+    Caption = 'Warning - Client'
+    Color = clBtnFace
+    FriendlyName = 'IWBTN_WARNING_CLIENT'
+    ScriptEvents = <
+      item
+        EventCode.Strings = (
+          
+            'ShowBasicWarning("Atention!", "You won'#39't be able to revert this!' +
+            '");')
+        Event = 'onClick'
+      end>
+  end
+  object IWBTN_INFO_CLIENT: TIWButton
+    Left = 469
+    Top = 132
+    Width = 145
+    Height = 30
+    Caption = 'Info - Client'
+    Color = clBtnFace
+    FriendlyName = 'IWBTN_INFO_CLIENT'
+    ScriptEvents = <
+      item
+        EventCode.Strings = (
+          'ShowBasicInfo('#39'Hi!'#39', '#39'Info Text message'#39');')
         Event = 'onClick'
       end>
   end
