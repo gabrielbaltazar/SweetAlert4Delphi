@@ -11,9 +11,20 @@
 
 <body>
 
-    <h1>tetste</h1>
+    <h1>Sweet Alert 4 Delphi</h1>
 
-    <button onclick="Ola()">Olá</button>
+    {%IWBTN_BASIC_MESSAGE_SERVER%}    
+    {%IWBASIC_MESSAGE_CLIENT%}
+
+    <br /> <br />
+
+    {%IWBTN_SUCCESS_MESSAGE_SERVER%}
+    {%IWBTN_SUCCESS_MESSAGE_CLIENT%}
+
+    <br /> <br />
+
+    {%IWBTN_ERROR_MESSAGE_SERVER%}
+    {%IWBTN_ERROR_MESSAGE_CLIENT%}
 
     <script src="js/sweetalert2.all.min.js" ></script>
     <script src="js/sweetalert2.min.js" ></script>    
@@ -21,10 +32,11 @@
 
     <script>
         function Ola() {
-            SweetError({
-                title: 'Ops...',
-                text: 'Deu errado.'
-            });
+            Swal.fire('tetea');
+            // SweetError({
+            //     title: 'Ops...',
+            //     text: 'Deu errado.'
+            // });
         }
     </script>
 </body>

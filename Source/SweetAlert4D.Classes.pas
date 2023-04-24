@@ -3,6 +3,9 @@ unit SweetAlert4D.Classes;
 interface
 
 uses
+  System.JSON,
+  System.SysUtils,
+  SweetAlert4D.Helper.JSON,
   SweetAlert4D.Interfaces;
 
 type
@@ -36,6 +39,8 @@ type
 
     function Buttons: ISweetAlert4DButtons;
     function Image: ISweetAlert4DImage;
+    function Message: string;
+    function Initialize: ISweetAlert4D;
   public
     constructor Create;
     class function New: ISweetAlert4D;
@@ -81,6 +86,7 @@ type
     function DenyButtonColor: string; overload;
     function ReverseButtons: Boolean; overload;
 
+    function Initialize: ISweetAlert4DButtons;
     function &End: ISweetAlert4D;
   public
     constructor Create(AParent: ISweetAlert4D);
@@ -106,6 +112,7 @@ type
     function Height: Integer; overload;
     function Alt: string; overload;
 
+    function Initialize: ISweetAlert4DImage;
     function &End: ISweetAlert4D;
   public
     constructor Create(AParent: ISweetAlert4D);
@@ -130,6 +137,7 @@ end;
 constructor TSweetAlert4DImage.Create(AParent: ISweetAlert4D);
 begin
   FParent := AParent;
+  Initialize;
 end;
 
 function TSweetAlert4DImage.&End: ISweetAlert4D;
@@ -140,6 +148,14 @@ end;
 function TSweetAlert4DImage.Height: Integer;
 begin
   Result := FHeight;
+end;
+
+function TSweetAlert4DImage.Initialize: ISweetAlert4DImage;
+begin
+  FUrl := EmptyStr;
+  FAlt := EmptyStr;
+  FWidth := 0;
+  FHeight := 0;
 end;
 
 function TSweetAlert4DImage.Height(AValue: Integer): ISweetAlert4DImage;
@@ -186,8 +202,7 @@ constructor TSweetAlert4D.Create;
 begin
   FButtons := TSweetAlert4DButtons.New(Self);
   FImage := TSweetAlert4DImage.New(Self);
-  FIcon := siNone;
-  FPosition := spCenter;
+  Initialize;
 end;
 
 function TSweetAlert4D.Footer: string;
@@ -226,6 +241,34 @@ end;
 function TSweetAlert4D.Image: ISweetAlert4DImage;
 begin
   Result := FImage;
+end;
+
+function TSweetAlert4D.Initialize: ISweetAlert4D;
+begin
+  FIcon := siNone;
+  FPosition := spCenter;
+  FImage.Initialize;
+  FButtons.Initialize;
+end;
+
+function TSweetAlert4D.Message: string;
+var
+  LSweetMessage: TJSONObject;
+begin
+  LSweetMessage := TJSONObject.Create;
+  try
+    LSweetMessage.SetValue('title', FTitle)
+      .SetValue('text', FText)
+      .SetValue('icon', FIcon.Value)
+      .SetValue('footer', FFooter)
+      .SetValue('html', FHtml)
+      .SetValue('timer', FTimer)
+      .SetValue('position', FPosition.Value);
+
+    Result := LSweetMessage.ToJSON;
+  finally
+    LSweetMessage.Free;
+  end;
 end;
 
 class function TSweetAlert4D.New: ISweetAlert4D;
@@ -326,14 +369,7 @@ end;
 constructor TSweetAlert4DButtons.Create(AParent: ISweetAlert4D);
 begin
   FParent := AParent;
-  FShowCloseButton := False;
-  FShowCancelButton := False;
-  FShowDenyButton := False;
-  FFocusConfirm := False;
-  FConfirmButtonText := 'OK';
-  FCancelButtonText := 'Cancel';
-  FDenyButtonText := 'Deny';
-  FReverseButtons := False;
+  Initialize;
 end;
 
 function TSweetAlert4DButtons.DenyButtonColor: string;
@@ -366,6 +402,18 @@ end;
 function TSweetAlert4DButtons.FocusConfirm: Boolean;
 begin
   Result := FFocusConfirm;
+end;
+
+function TSweetAlert4DButtons.Initialize: ISweetAlert4DButtons;
+begin
+  FShowCloseButton := False;
+  FShowCancelButton := False;
+  FShowDenyButton := False;
+  FFocusConfirm := False;
+  FConfirmButtonText := 'OK';
+  FCancelButtonText := 'Cancel';
+  FDenyButtonText := 'Deny';
+  FReverseButtons := False;
 end;
 
 function TSweetAlert4DButtons.FocusConfirm(AValue: Boolean): ISweetAlert4DButtons;

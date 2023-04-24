@@ -107,6 +107,9 @@
         </DCCReference>
         <DCCReference Include="..\..\Source\SweetAlert4D.Interfaces.pas"/>
         <DCCReference Include="..\..\Source\SweetAlert4D.Classes.pas"/>
+        <DCCReference Include="..\..\Source\SweetAlert4D.Helper.JSON.pas"/>
+        <DCCReference Include="..\..\Source\SweetAlert4D.Dialog.Interfaces.pas"/>
+        <DCCReference Include="..\..\Source\SweetAlert4D.Dialog.IW.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

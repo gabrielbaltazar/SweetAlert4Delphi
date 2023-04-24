@@ -2,6 +2,9 @@ unit SweetAlert4D.Interfaces;
 
 interface
 
+uses
+  System.SysUtils;
+
 type
   TSweetIcon = (siNone, siInfo, siSuccess, siError, siWarning, siQuestion);
 
@@ -31,6 +34,8 @@ type
 
     function Buttons: ISweetAlert4DButtons;
     function Image: ISweetAlert4DImage;
+    function Message: string;
+    function Initialize: ISweetAlert4D;
   end;
 
   ISweetAlert4DButtons = interface
@@ -59,6 +64,7 @@ type
     function DenyButtonColor: string; overload;
     function ReverseButtons: Boolean; overload;
 
+    function Initialize: ISweetAlert4DButtons;
     function &End: ISweetAlert4D;
   end;
 
@@ -74,9 +80,51 @@ type
     function Height: Integer; overload;
     function Alt: string; overload;
 
+    function Initialize: ISweetAlert4DImage;
     function &End: ISweetAlert4D;
   end;
 
+  TSweetIconHelper = record helper for TSweetIcon
+  public
+    function Value: string;
+  end;
+
+  TSweetPositionHelper = record helper for TSweetPosition
+  public
+    function Value: string;
+  end;
+
 implementation
+
+{ TSweetIconHelper }
+
+function TSweetIconHelper.Value: string;
+begin
+  case Self of
+    siNone: Result := EmptyStr;
+    siInfo: Result := 'info';
+    siSuccess: Result := 'success';
+    siError: Result := 'error';
+    siWarning: Result := 'warning';
+    siQuestion: Result := 'question';
+  end;
+end;
+
+{ TSweetPositionHelper }
+
+function TSweetPositionHelper.Value: string;
+begin
+  case Self of
+    spTop: Result := 'top';
+    spTopStart: Result := 'top-start';
+    spTopEnd: Result := 'top-end';
+    spCenter: Result := 'center';
+    spCenterStart: Result := 'center-start';
+    spCenterEnd: Result := 'center-end';
+    spBottom: Result := 'bottom';
+    spBottomStart: Result := 'bottom-start';
+    spBottomEnd: Result := 'bottom-end';
+  end;
+end;
 
 end.
