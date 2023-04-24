@@ -41,15 +41,15 @@ object FrmTeste: TFrmTeste
         Event = 'onClick'
       end>
   end
-  object IWBTN_QUESTION: TIWButton
+  object IWBTN_QUESTION_SERVER: TIWButton
     Left = 16
     Top = 208
     Width = 145
     Height = 30
     Caption = 'Question - Server'
     Color = clBtnFace
-    FriendlyName = 'IWBTN_QUESTION'
-    OnAsyncClick = IWBTN_QUESTIONAsyncClick
+    FriendlyName = 'IWBTN_QUESTION_SERVER'
+    OnAsyncClick = IWBTN_QUESTION_SERVERAsyncClick
   end
   object IWBTN_SUCCESS_SERVER: TIWButton
     Left = 16
@@ -153,9 +153,40 @@ object FrmTeste: TFrmTeste
         Event = 'onClick'
       end>
   end
+  object IWBTN_QUESTION_CLIENT: TIWButton
+    Left = 167
+    Top = 208
+    Width = 145
+    Height = 30
+    Caption = 'Question - Client'
+    Color = clBtnFace
+    FriendlyName = 'IWBTN_QUESTION_CLIENT'
+    ScriptEvents = <
+      item
+        EventCode.Strings = (
+          
+            'ShowBasicQuestion("Are you sure?", "You won'#39't be able to revert ' +
+            'this!", function () {'
+          '  ShowBasicSuccess('#39'Yes'#39', '#39'You clicked OK!'#39')'
+          '}, function () {'
+          '  ShowBasicSuccess('#39'Yes'#39', '#39'You clicked OK!'#39')'
+          '});')
+        Event = 'onClick'
+      end>
+  end
+  object IW_DIALOG_TIMER: TIWButton
+    Left = 16
+    Top = 264
+    Width = 145
+    Height = 30
+    Caption = 'Dialog Timer'
+    Color = clBtnFace
+    FriendlyName = 'IW_DIALOG_TIMER'
+    OnAsyncClick = IW_DIALOG_TIMERAsyncClick
+  end
   object IWTemplate: TIWTemplateProcessorHTML
     TagType = ttIntraWeb
     Left = 480
-    Top = 320
+    Top = 200
   end
 end

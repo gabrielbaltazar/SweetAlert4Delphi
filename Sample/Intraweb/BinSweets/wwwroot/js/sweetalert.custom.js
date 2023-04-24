@@ -46,35 +46,21 @@ function ShowBasicWarning(ATitle, AText) {
     ShowSweetMessage(message);
 }
 
-function ShowBasicQuestion(ATitle, AText) {
+function ShowBasicQuestion(ATitle, AText, AOnConfirm, AOnCancel) {
     let message = {
         icon: 'question',
         title: ATitle,
-        text: AText
+        text: AText,
+        showCancelButton: true
     };
 
-    ShowSweetMessage(message);
-}
-
-function ShowSuccess(message) {
-    let sweetMessage = message;
-    sweetMessage.icon = 'success';
-    ShowSweetMessage(sweetMessage);
-}
-
-// function SweetError(title, text) {
-//     let message = {
-//         icon: 'error',
-//         showCloseButton: true,
-//         title,
-//         text
-//     };
-
-//     Swal.fire(message);
-// }
-
-function SweetError(message) {
-    let sweetMessage = message;
-    sweetMessage.icon = 'error',
-    ShowSweetMessage(sweetMessage);
+    Swal.fire(message).then(result => {
+        if (result.isConfirmed) {
+            AOnConfirm();
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            AOnCancel();
+          }
+    })
 }

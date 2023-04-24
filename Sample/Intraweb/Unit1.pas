@@ -14,7 +14,7 @@ type
     IWTemplate: TIWTemplateProcessorHTML;
     IWBTN_BASIC_SERVER: TIWButton;
     IWBASIC_CLIENT: TIWButton;
-    IWBTN_QUESTION: TIWButton;
+    IWBTN_QUESTION_SERVER: TIWButton;
     IWBTN_SUCCESS_SERVER: TIWButton;
     IWBTN_SUCCESS_CLIENT: TIWButton;
     IWBTN_ERROR_SERVER: TIWButton;
@@ -23,13 +23,16 @@ type
     IWBTN_INFO_SERVER: TIWButton;
     IWBTN_WARNING_CLIENT: TIWButton;
     IWBTN_INFO_CLIENT: TIWButton;
+    IWBTN_QUESTION_CLIENT: TIWButton;
+    IW_DIALOG_TIMER: TIWButton;
     procedure IWAppFormCreate(Sender: TObject);
     procedure IWBTN_BASIC_SERVERAsyncClick(Sender: TObject; EventParams: TStringList);
-    procedure IWBTN_QUESTIONAsyncClick(Sender: TObject; EventParams: TStringList);
+    procedure IWBTN_QUESTION_SERVERAsyncClick(Sender: TObject; EventParams: TStringList);
     procedure IWBTN_SUCCESS_SERVERAsyncClick(Sender: TObject; EventParams: TStringList);
     procedure IWBTN_ERROR_SERVERAsyncClick(Sender: TObject; EventParams: TStringList);
     procedure IWBTN_WARNING_SERVERAsyncClick(Sender: TObject; EventParams: TStringList);
     procedure IWBTN_INFO_SERVERAsyncClick(Sender: TObject; EventParams: TStringList);
+    procedure IW_DIALOG_TIMERAsyncClick(Sender: TObject; EventParams: TStringList);
   private
     FSweetAlert: ISweetAlert4DDialog;
 
@@ -65,7 +68,7 @@ begin
   FSweetAlert.ShowBasicInfo('Hi!', 'Info Text message');
 end;
 
-procedure TFrmTeste.IWBTN_QUESTIONAsyncClick(Sender: TObject; EventParams: TStringList);
+procedure TFrmTeste.IWBTN_QUESTION_SERVERAsyncClick(Sender: TObject; EventParams: TStringList);
 begin
   FSweetAlert.Arguments
     .Icon(TSweetIcon.siQuestion)
@@ -74,8 +77,8 @@ begin
     .Buttons
       .ShowCancelButton(True);
   FSweetAlert
-    .OnClickOK('console.log("OK")')
-    .OnClickCancel('console.log("CANCEL")')
+    .OnClickOK('ajaxCall(''OnClickOK'')')
+    .OnClickCancel('ajaxCall(''OnClickCancel'')')
     .Show;
 end;
 
@@ -89,14 +92,22 @@ begin
   FSweetAlert.ShowBasicWarning('Atention!', 'You won''t be able to revert this!');
 end;
 
+procedure TFrmTeste.IW_DIALOG_TIMERAsyncClick(Sender: TObject; EventParams: TStringList);
+begin
+  FSweetAlert.Arguments
+    .Timer(5); // seconds
+
+  FSweetAlert.ShowBasicSuccess('Yes!', 'This message will hide in 5 seconds!');
+end;
+
 procedure TFrmTeste.OnClickCancel(AParams: TStringList);
 begin
-//
+  FSweetAlert.ShowBasicError('Ops..', 'You clicked Cancel');
 end;
 
 procedure TFrmTeste.OnClickOK(AParams: TStringList);
 begin
-//
+  FSweetAlert.ShowBasicSuccess('Yes!', 'You clicked OK');
 end;
 
 initialization

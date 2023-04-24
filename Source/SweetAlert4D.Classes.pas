@@ -262,7 +262,7 @@ begin
       .SetValue('icon', FIcon.Value)
       .SetValue('footer', FFooter)
       .SetValue('html', FHtml)
-      .SetValue('timer', FTimer)
+      .SetValue('timer', FTimer * 1000)
       .SetValue('position', FPosition.Value);
 
     LSweetMessage.SetValue('showCloseButton', FButtons.ShowCloseButton)
